@@ -15,11 +15,11 @@ namespace ProjectDB
         const string Command_EmployeeSearch = "3";
         const string Command_EmployeesWithoutProjects = "4";
         const string Command_ProjectList = "5";
-        const string Command_CreateDepartment = "10";
-        const string Command_UpdateDepartment = "11";
-        const string Command_CreateProject = "12";
-        const string Command_AssignEmployeeToProject = "13";
-        const string Command_RemoveEmployeeFromProject = "14";
+        const string Command_CreateDepartment = "6";
+        const string Command_UpdateDepartment = "7";
+        const string Command_CreateProject = "8";
+        const string Command_AssignEmployeeToProject = "9";
+        const string Command_RemoveEmployeeFromProject = "10";
         const string Command_Quit = "q";
         const string DatabaseConnection = "";
 
@@ -311,11 +311,11 @@ namespace ProjectDB
             Console.WriteLine(" 3 - Employee search by first and last name");
             Console.WriteLine(" 4 - Get employees without projects");
             Console.WriteLine(" 5 - Get all projects");
-            Console.WriteLine("10 - Create Department");
-            Console.WriteLine("11 - Update Department Name");
-            Console.WriteLine("12 - Create Project");
-            Console.WriteLine("13 - Assign Employee to Project");
-            Console.WriteLine("14 - Remove Employee from Project");
+            Console.WriteLine(" 6 - Create Department");
+            Console.WriteLine(" 7 - Update Department Name");
+            Console.WriteLine(" 8 - Create Project");
+            Console.WriteLine(" 9 - Assign Employee to Project");
+            Console.WriteLine("10 - Remove Employee from Project");
 
             Console.WriteLine(" Q - Quit");
             Console.WriteLine();
