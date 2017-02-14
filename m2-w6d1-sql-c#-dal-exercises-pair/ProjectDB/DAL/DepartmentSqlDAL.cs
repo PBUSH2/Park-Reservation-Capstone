@@ -45,7 +45,7 @@ namespace ProjectDB.DAL
 
 
             }
-            catch (Exception e)
+            catch (SqlException e)
             {
                 throw;
             }
@@ -68,7 +68,7 @@ namespace ProjectDB.DAL
                     return (rowsAffected > 0);
                 }
             }
-            catch (Exception e)
+            catch (SqlException e)
             {
                 throw;
             }
@@ -91,7 +91,7 @@ namespace ProjectDB.DAL
                     return (rowsAffected > 0);
                 }
             }
-            catch (Exception e)
+            catch (SqlException e)
             {
                 throw;
             }
