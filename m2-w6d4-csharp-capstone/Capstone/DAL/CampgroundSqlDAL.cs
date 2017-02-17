@@ -13,7 +13,7 @@ namespace Capstone.DAL
     {
         string connectionString = ConfigurationManager.ConnectionStrings["CapstoneDatabase"].ConnectionString;
         const string SQL_SearchCampgroundByPark = "Select * from Campground inner join park on park.park_id = campground.park_id where park.name = @parkname";
-        const string SQL_SearchDateAvailabilityByCampground = "Select distinct top 5 site.* from site inner join campground on campground.campground_id = site.campground_id inner join reservation on reservation.site_id = site.site_id where from_date not between @fromdate and @enddate and to_date not between @fromdate and @enddate and campground.name = @campgroundname;";
+        const string SQL_SearchDateAvailabilityByCampground = "SELECT TOP 5 * FROM site INNER JOIN campground on site.campground_id = campground.campground_id WHERE campground.name = @campgroundname AND site.site_id NOT IN(SELECT site.site_id FROM site INNER JOIN reservation on reservation.site_id = site.site_id Where from_date not between @fromdate and @enddate and to_date not between @fromdate and @enddate);";
         public List<Campground> SearchCampgroundByPark(Park park)
         {
             List<Campground> campgroundList = new List<Campground>();

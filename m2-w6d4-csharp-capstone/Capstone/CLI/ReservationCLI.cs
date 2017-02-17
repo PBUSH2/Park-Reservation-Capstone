@@ -22,8 +22,16 @@ namespace Capstone
                 switch (command)
                 {
                     case "1":
-                        reservation = SearchDateAvailabilityByCampground(); 
-                        BookReservation(reservation);
+                        reservation = SearchDateAvailabilityByCampground();
+                        if (reservation != null)
+                        {
+                            BookReservation(reservation);
+                            
+                        }
+                        else
+                        {
+                            return;
+                        }
                         break;
                     case "2":
                         return;
@@ -35,8 +43,9 @@ namespace Capstone
         }
         public void ReservationMenu()
         {
+            Console.WriteLine();
             Console.WriteLine("Select a Command");
-            Console.WriteLine("1)search for Available Reservation");
+            Console.WriteLine("1)Search for Available Reservation");
             Console.WriteLine("2)Return to Previous Screen");
         }
 
@@ -67,34 +76,7 @@ namespace Capstone
 
             return reservation;
         }
-        //public void SearchDateAvailabilityByCampground()
-        //{
 
-        //    string campground = CLIHelper.GetString("Please enter campground name: ");
-        //    DateTime startDate = CLIHelper.GetDateTime("Please enter a start date: ");
-        //    DateTime endDate = CLIHelper.GetDateTime("Please enter an end date: ");
-        //    Reservation reservation = new Reservation()
-        //    {
-        //        Name = campground,
-        //        FromDate = startDate,
-        //        ToDate = endDate
-        //    };
-
-        //    CampgroundSqlDAL dal = new CampgroundSqlDAL();
-        //    List<Site> siteList = dal.SearchDateAvailabilityByCampground(reservation);
-        //    if (siteList.Count < 1)
-        //    {
-        //        Console.WriteLine("No available sites for this date range.");
-        //    }
-        //    else
-
-        //    {
-        //        Console.WriteLine("Site No.".ToString().PadRight(10) + "Max Occup.".PadRight(10) + "Accessible?".PadRight(20) + "Utility".PadRight(15) + "Cost");
-        //        siteList.ForEach(site => Console.WriteLine(site));
-        //    }
-
-
-        //}
         public void BookReservation(Reservation r)
         {
 

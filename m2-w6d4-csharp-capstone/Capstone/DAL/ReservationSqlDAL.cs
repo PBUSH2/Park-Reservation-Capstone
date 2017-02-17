@@ -17,8 +17,8 @@ namespace Capstone.DAL
         string SQL_BookReservation = $"Insert into reservation Values(@siteid, @reservationname, @fromdate, @enddate, @createdate); SELECT cast(scope_identity() as int);";
         string SQL_CheckMaxOccupancy = "Select max_occupancy from site inner join campground on site.campground_id = campground.campground_id where campground.name = @campgroundname and site.site_number = @sitenumber; Select cast(scope_identity() as int);";
         const string SQL_SearchForConflicts = "Select Count (*) from site inner join campground on campground.campground_id = site.campground_id inner join reservation on reservation.site_id = site.site_id where from_date between @fromdate and @enddate and to_date between @fromdate and @enddate and campground.name = @campgroundname and site.site_number = @sitenumber; Select cast(scope_identity() as int);";
-
-        string ConnectionString = ConfigurationManager.ConnectionStrings["CapstoneDatabase"].ConnectionString;
+        string ConnectionString = @"Data Source= .\SQLEXPRESS;Initial Catalog = campground; User ID = te_student;Password = sqlserver1";
+        //string ConnectionString = ConfigurationManager.ConnectionStrings["CapstoneDatabase"].ConnectionString;
         public int BookReservation(Reservation r)
         {
             try
