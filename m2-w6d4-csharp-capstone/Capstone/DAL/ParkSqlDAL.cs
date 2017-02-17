@@ -19,7 +19,7 @@ namespace Capstone.DAL
         private const string SQL_GetParkInfo = "Select * from Park where park.name = @parkname";
 
         public Park GetParkInfo(string parkName)
-        {
+        {   
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))

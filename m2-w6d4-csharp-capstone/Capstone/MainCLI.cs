@@ -9,40 +9,56 @@ using System.Threading.Tasks;
 namespace Capstone
 {
     class MainCLI
+
     {
+        CampgroundCLI campgroundCLI = new CampgroundCLI();
         private const string Command_ViewAllParks = "1";
         private const string Command_ViewAvailableCampgroundsByPark = "2";
         private const string Command_DateAvailabilityByCampground = "3";
         private const string Command_BookReservation = "4";
         private const string Command_Quit = "q";
+        Park park = new Park();
+        string[] validParkNames = new string[3] { "ACADIA", "ARCHES", "CUYAHOGA VALLEY" };
 
 
         public void RunCLI()
         {
-            ViewAllParks();
+           
+           
 
             while (true)
-            {
+            {   ViewAllParks();
                 string parkName = CLIHelper.GetString("Please enter a park name: ");
+
+                Console.WriteLine();
                 if (parkName.ToLower() == "q")
                 {
                     break;
                 }
-                GetParkInfo(parkName);
+
+                if(!validParkNames.Contains(parkName.ToUpper()))
+                {
+                    Console.WriteLine("No campsites found for given Park Names. Please enter a valid park name.");
+                    continue;
+                }
+             
+               
+                park = GetParkInfo(parkName);
+                
+                campgroundCLI.RunCampgroundCLI(park);
                
             }
             Console.WriteLine("Thank you for using the National Park Campsite Reservation System");
         }
 
-
-
-
-        public void GetParkInfo(string parkName)
+        public Park GetParkInfo(string parkName)
         {
+
             ParkSqlDAL dal = new ParkSqlDAL();
-            Park park = dal.GetParkInfo(parkName);
+            park = dal.GetParkInfo(parkName);
 
             Console.WriteLine(park);
+            return park;
 
         }
         public void ViewAllParks()
@@ -58,17 +74,7 @@ namespace Capstone
 
             Console.WriteLine("Q)  quit");
         }
-        public void SearchCampgroundsByPark()
-        {
-            string parkName = CLIHelper.GetString("Please enter park name: ");
 
-            CampgroundSqlDAL dal = new CampgroundSqlDAL();
-            List<Campground> campgroundList = dal.SearchCampgroundByPark(parkName);
-
-            campgroundList.ForEach(camp =>
-            Console.WriteLine(camp)
-            );
-        }
         public void SearchDateAvailabilityByCampground()
         {
 

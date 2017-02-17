@@ -16,8 +16,9 @@ namespace ProjectDB.DAL.Tests
     {
         TransactionScope tran;
         private int departmentId;
-        private string connectionString = @"Data Source= .\SQLEXPRESS;database = projects; User ID = te_student;Password = sqlserver1";
         private int departmentCount = 0;
+        private string connectionString = @"Data Source= .\SQLEXPRESS;database = projects; User ID = te_student;Password = sqlserver1";
+        
 
         [TestInitialize]
         public void Setup()

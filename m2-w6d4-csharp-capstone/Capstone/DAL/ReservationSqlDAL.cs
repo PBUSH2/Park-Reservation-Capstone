@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Capstone.DAL
 {
-    class ReservationSqlDAL
+    public class ReservationSqlDAL
     {
         int reservationId;
         string SQL_FindSiteID = "Select site_id from site join campground on campground.campground_id = site.campground_id where campground.name = @campgroundname; SELECT cast(scope_identity() as int);";

@@ -13,8 +13,8 @@ namespace Capstone.DAL
     {
         string connectionString = ConfigurationManager.ConnectionStrings["CapstoneDatabase"].ConnectionString;
         const string SQL_SearchCampgroundByPark = "Select * from Campground inner join park on park.park_id = campground.park_id where park.name = @parkname";
-        const string SQL_SearchDateAvailabilityByCampground = "Select top 5 * from site inner join campground on campground.campground_id = site.campground_id inner join reservation on reservation.site_id = site.site_id where from_date not between @fromdate and @enddate and to_date not between @fromdate and @enddate and campground.name = @campgroundname";
-        public List<Campground> SearchCampgroundByPark(string parkName)
+        const string SQL_SearchDateAvailabilityByCampground = "Select distinct top 5 site.* from site inner join campground on campground.campground_id = site.campground_id inner join reservation on reservation.site_id = site.site_id where from_date not between @fromdate and @enddate and to_date not between @fromdate and @enddate and campground.name = @campgroundname;";
+        public List<Campground> SearchCampgroundByPark(Park park)
         {
             List<Campground> campgroundList = new List<Campground>();
             try
@@ -23,7 +23,7 @@ namespace Capstone.DAL
                 {
                     conn.Open();
                     SqlCommand cmd = new SqlCommand(SQL_SearchCampgroundByPark, conn);
-                    cmd.Parameters.AddWithValue("@parkname", parkName);
+                    cmd.Parameters.AddWithValue("@parkname", park.Name);
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
@@ -61,7 +61,7 @@ namespace Capstone.DAL
 
                     cmd.Parameters.AddWithValue("@fromdate", r.FromDate);
                     cmd.Parameters.AddWithValue("@enddate", r.ToDate);
-                    cmd.Parameters.AddWithValue("@campgroundname", r.Name);
+                    cmd.Parameters.AddWithValue("@campgroundname", r.CampgroundName);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 

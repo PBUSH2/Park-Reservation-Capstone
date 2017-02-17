@@ -15,6 +15,7 @@ namespace Capstone.Models
         public bool Accessible { get; set; }
         public int MaxRvLength { get; set; }
         public bool Utilities { get; set; }
+        public double Cost { get; set; }
 
         public override string ToString()
         {

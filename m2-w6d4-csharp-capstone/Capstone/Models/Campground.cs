@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace Capstone.Models
 {
@@ -17,7 +18,7 @@ namespace Capstone.Models
 
         public override string ToString()
         {
-            return CampgroundId.ToString().PadRight(5) + Name.PadRight(20) + OpenFrom.ToString().PadRight(10) + OpenTil.ToString().PadRight(10) + DailyFee.ToString("C2");
+            return CampgroundId.ToString().PadRight(5) + Name.PadRight(20) + DateTimeFormatInfo.CurrentInfo.GetMonthName(OpenFrom).PadRight(12) + DateTimeFormatInfo.CurrentInfo.GetMonthName(OpenTil).ToString().PadRight(12) + DailyFee.ToString("C2");
 
         }
     }
