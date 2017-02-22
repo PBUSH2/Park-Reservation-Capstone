@@ -10,7 +10,7 @@ namespace Capstone
 {
     class ReservationCLI
     {
-        Reservation reservation = new Reservation();
+        
 
         public void RunReservationCLI()
         {
@@ -22,21 +22,18 @@ namespace Capstone
                 switch (command)
                 {
                     case "1":
-                        reservation = SearchDateAvailabilityByCampground();
+                        Reservation reservation = SearchDateAvailabilityByCampground();
                         if (reservation != null)
                         {
-                            BookReservation(reservation);
-                            
+                            BookReservation(reservation);                            
                         }
-                        else
-                        {
-                            return;
-                        }
-                        break;
+                      
+                        return;
                     case "2":
                         return;
 
                     default:
+                        Console.WriteLine("Command not valid.");
                         break;
                 }
             }

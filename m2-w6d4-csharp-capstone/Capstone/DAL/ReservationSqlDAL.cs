@@ -31,38 +31,36 @@ namespace Capstone.DAL
                     cmd = new SqlCommand(SQL_CheckMaxOccupancy, conn);
                     cmd.Parameters.AddWithValue("@campgroundname", r.CampgroundName);
                     cmd.Parameters.AddWithValue("@sitenumber", r.SiteNumber);
+
                     int maxOccupancy = (int)cmd.ExecuteScalar();
                     if (maxOccupancy < r.NumberCampers)
                     {
                         throw new OverbookException($"The maximum occupancy of this campsite is {maxOccupancy}");
                     }
+
                     cmd = new SqlCommand(SQL_SearchForConflicts, conn);
                     cmd.Parameters.AddWithValue("@fromdate", r.FromDate);
                     cmd.Parameters.AddWithValue("@enddate", r.ToDate);
                     cmd.Parameters.AddWithValue("@campgroundname", r.CampgroundName);
                     cmd.Parameters.AddWithValue("@sitenumber", r.SiteNumber);
+
                     int numberOfConflicts = (int)cmd.ExecuteScalar();
                     if (numberOfConflicts > 0)
                     {
                         throw new BookingConflictException("This site is already booked for one or more of the dates in this range.");
                     }
-                    cmd = new SqlCommand(SQL_FindSiteID, conn);
-                    cmd.Parameters.AddWithValue("@campgroundname", r.CampgroundName);
-                    int siteID = (int)cmd.ExecuteScalar();
 
                     cmd = new SqlCommand(SQL_BookReservation, conn);
                     cmd.Parameters.AddWithValue("@reservationname", r.Name);
-                    cmd.Parameters.AddWithValue("@siteid", siteID);
+                    cmd.Parameters.AddWithValue("@siteid", r.SiteId);
                     cmd.Parameters.AddWithValue("@fromdate", r.FromDate);
                     cmd.Parameters.AddWithValue("@enddate", r.ToDate);
                     cmd.Parameters.AddWithValue("@createdate", Convert.ToDateTime(DateTime.Now.ToString("yyyy-MM-dd")));
                     reservationId = (int)cmd.ExecuteScalar();
                 }
-
             }
             catch (SqlException e)
             {
-
                 throw;
             }
             return reservationId;

@@ -17,15 +17,12 @@ namespace Capstone
         private const string Command_DateAvailabilityByCampground = "3";
         private const string Command_BookReservation = "4";
         private const string Command_Quit = "q";
-        Park park = new Park();
+       
         string[] validParkNames = new string[3] { "ACADIA", "ARCHES", "CUYAHOGA VALLEY" };
 
 
         public void RunCLI()
-        {
-           
-           
-
+        {           
             while (true)
             {   ViewAllParks();
                 string parkName = CLIHelper.GetString("Please enter a park name: ");
@@ -43,7 +40,7 @@ namespace Capstone
                 }
              
                
-                park = GetParkInfo(parkName);
+                Park park = GetParkInfo(parkName);
                 
                 campgroundCLI.RunCampgroundCLI(park);
                
@@ -55,7 +52,7 @@ namespace Capstone
         {
 
             ParkSqlDAL dal = new ParkSqlDAL();
-            park = dal.GetParkInfo(parkName);
+            Park park = dal.GetParkInfo(parkName);
 
             Console.WriteLine(park);
             return park;
@@ -110,7 +107,7 @@ namespace Capstone
             int numberCampers = CLIHelper.GetInteger("Please enter the number of campers:");
             DateTime startDate = CLIHelper.GetDateTime("Please enter a start date:");
             DateTime endDate = CLIHelper.GetDateTime("Please enter an end date:");
-            int reservationID = 0;
+            int reservationID =0;
 
                 Reservation r = new Reservation()
                 {
